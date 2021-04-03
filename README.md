@@ -19,17 +19,17 @@
 
 ## productsテーブル
 
-| Column         | Type       | Options                        |
-| -------------- | -------    | ------------------------------ |
-| product_name   | string     | null: false                    |
-| description    | text       | null: false                    |
-| category       | integer    | null: false                    |
-| status         | integer    | null: false                    |
-| postage        | integer    | null: false                    |
-| prefecture     | integer    | null: false                    |
-| days           | integer    | null: false                    |
-| price          | integer    | null: false                    |
-| user           | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+| --------------- | -------    | ------------------------------ |
+| product_name    | string     | null: false                    |
+| description     | text       | null: false                    |
+| category_id     | integer    | null: false                    |
+| status_id       | integer    | null: false                    |
+| postage_id      | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
+| shipping_day_id | integer    | null: false                    |
+| price           | integer    | null: false                    |
+| user            | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -41,15 +41,15 @@
 
 ## destinationsテーブル
 
-| Column                      | Type       | Options                        |
-| --------------------------- | -------    | ------------------------------ |
-| postcode                    | string     | null: false                    |
-| prefecture                  | integer    | null: false                    |
-| city                        | string     | null: false, foreign_key: true |
-| address                     | string     | null: false                    |
-| building_name               | string     |                                |
-| phone_number                | string     | null: false                    |
-| purchase_histories          | references | null: false, foreign_key: true |
+| Column                   | Type       | Options                        |
+| ------------------------ | -------    | ------------------------------ |
+| postcode                 | string     | null: false                    |
+| prefecture_id            | integer    | null: false                    |
+| city                     | string     | null: false, foreign_key: true |
+| address                  | string     | null: false                    |
+| building_name            | string     |                                |
+| phone_number             | string     | null: false                    |
+| purchase_history         | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -75,7 +75,7 @@
 ## category(ActiveHash)
 ## status(ActiveHash)
 ## postage(ActiveHash)
-## days(ActiveHash)
+## shipping_day(ActiveHash)
 ## images(ActiveStorage)
 
 
