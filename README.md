@@ -1,20 +1,20 @@
 ## usersテーブル
 
-| Column          | Type   | Options     |
-| --------------- | -------| ----------- |
-| nickname        | string | null: false |
-| email           | string | null: false |
-| password        | string | null: false |
-| first_name      | string | null: false |
-| last_name       | string | null: false |
-| first_name_kana | string | null: false |
-| last_name_kana  | string | null: false |
-| birthday        | date   | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | -------| ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| first_name         | string | null: false               |
+| last_name          | string | null: false               |
+| first_name_kana    | string | null: false               |
+| last_name_kana     | string | null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
 - has_many :products
-- has_many :destinations
-- belongs_to :card
+- has_many :purchase_histories
+
 
 
 ## productsテーブル
@@ -23,54 +23,53 @@
 | -------------- | -------    | ------------------------------ |
 | product_name   | string     | null: false                    |
 | description    | text       | null: false                    |
-| category_id    | references | null: false, foreign_key: true |
-| status_id      |            |                                |
-| postage_id     |            |                                |
-| prefecture_id  |            |                                |
-| days_id        |            |                                |
+| category_id    | integer    | null: false                    |
+| status_id      | integer    | null: false                    |
+| postage_id     | integer    | null: false                    |
+| prefecture_id  | integer    | null: false                    |
+| days_id        | integer    | null: false                    |
 | price          | integer    | null: false                    |
 | user_id        | references | null: false, foreign_key: true |
-| image          |            |                                |
 
 
 ### Association
-- belongs_to :destinations
 - belongs_to :users
-- belongs_to :status(ActiveHash)
-- belongs_to :postage(ActiveHash)
-- belongs_to :prefecture(ActiveHash)
-- belongs_to :days(ActiveHash)
+- has_one :purchase_history
 - has_one_attached :image
+
 
 
 ## destinationsテーブル
 
-| Column        | Type       | Options                        |
-| ------------  | -------    | ------------------------------ |
-| postcode      | string     | null: false                    |
-| prefecture_id |            |                                |
-| city          | string     | null: false, foreign_key: true |
-| address       | string     | null: false                    |
-| building_name | string     | null: false                    |
-| phone_number  | string     | null: false                    |
-| user_id       | references | null: false, foreign_key: true |
-| product_id    | references | null: false, foreign_key: true |
+| Column                      | Type       | Options                        |
+| --------------------------- | -------    | ------------------------------ |
+| postcode                    | string     | null: false                    |
+| prefecture_id               | integer    | null: false                    |
+| city                        | string     | null: false, foreign_key: true |
+| address                     | string     | null: false                    |
+| building_name               | string     |                                |
+| phone_number                | string     | null: false                    |
+| purchase_histories_id       | references | null: false, foreign_key: true |
 
+
+### Association
+- belongs_to :purchase_history
+- belongs_to :prefecture(ActiveHash)
+
+
+## purchase_histories
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| user_id    | references | null: false, foreign_key: true |
+| product_id | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - belongs_to :product
-- belongs_to :prefecture(ActiveHash)
+- has_one :purchase_history
 
-## cardsテーブル
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| card_no | integer    | null: false                    |
-| user_id | references | null: false, foreign_key: true |
 
-### Association
-- belongs_to :user
 
 ## prefecture(ActiveHash)
 ## category(ActiveHash)
