@@ -23,17 +23,17 @@
 | -------------- | -------    | ------------------------------ |
 | product_name   | string     | null: false                    |
 | description    | text       | null: false                    |
-| category_id    | integer    | null: false                    |
-| status_id      | integer    | null: false                    |
-| postage_id     | integer    | null: false                    |
-| prefecture_id  | integer    | null: false                    |
-| days_id        | integer    | null: false                    |
+| category       | integer    | null: false                    |
+| status         | integer    | null: false                    |
+| postage        | integer    | null: false                    |
+| prefecture     | integer    | null: false                    |
+| days           | integer    | null: false                    |
 | price          | integer    | null: false                    |
-| user_id        | references | null: false, foreign_key: true |
+| user           | references | null: false, foreign_key: true |
 
 
 ### Association
-- belongs_to :users
+- belongs_to :user
 - has_one :purchase_history
 - has_one_attached :image
 
@@ -44,12 +44,12 @@
 | Column                      | Type       | Options                        |
 | --------------------------- | -------    | ------------------------------ |
 | postcode                    | string     | null: false                    |
-| prefecture_id               | integer    | null: false                    |
+| prefecture                  | integer    | null: false                    |
 | city                        | string     | null: false, foreign_key: true |
 | address                     | string     | null: false                    |
 | building_name               | string     |                                |
 | phone_number                | string     | null: false                    |
-| purchase_histories_id       | references | null: false, foreign_key: true |
+| purchase_histories          | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -60,8 +60,8 @@
 ## purchase_histories
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
-| user_id    | references | null: false, foreign_key: true |
-| product_id | references | null: false, foreign_key: true |
+| user       | references | null: false, foreign_key: true |
+| product    | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
