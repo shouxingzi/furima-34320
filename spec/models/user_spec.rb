@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
       end
     end  
     
-    context '新規登録できない' do
+    context '新規登録できないとき' do
       it 'nicknameが空では登録できない' do
         @user.nickname = ''
         @user.valid?
@@ -58,8 +58,8 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
       it 'passwordが６文字以上でないと登録できない' do
-        @user.password = '12345'
-        @user.password_confirmation = '1234'
+        @user.password = 'abc12'
+        @user.password_confirmation = 'abc12'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
