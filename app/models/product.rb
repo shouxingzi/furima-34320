@@ -18,6 +18,7 @@ class Product < ApplicationRecord
     validates :prefecture_id
     validates :shipping_day_id
     validates :price
+    validates :image
     with_options foreign_key: true do
       validates :user
     end
