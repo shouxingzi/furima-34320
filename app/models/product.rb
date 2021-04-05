@@ -8,4 +8,18 @@ class Product < ApplicationRecord
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :shipping_day
   belongs_to_active_hash :status
+
+  with_options presence: true do
+    validates :product_name
+    validates :description    
+    validates :category_id
+    validates :status_id
+    validates :postage_id
+    validates :prefecture_id
+    validates :shipping_day_id
+    validates :price
+    with_options foreign_key: true do
+      validates :user
+    end
+  end
 end
