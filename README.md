@@ -12,12 +12,12 @@
 | birthday           | date   | null: false               |
 
 ### Association
-- has_many :products
+- has_many :items
 - has_many :purchase_histories
 
 
 
-## productsテーブル
+## itemsテーブル
 
 | Column          | Type       | Options                        |
 | --------------- | -------    | ------------------------------ |
@@ -65,7 +65,7 @@
 
 ### Association
 - belongs_to :user
-- belongs_to :product
+- belongs_to :item
 - has_one :purchase_history
 
 

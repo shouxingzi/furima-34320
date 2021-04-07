@@ -1,6 +1,6 @@
-class Product < ApplicationRecord
+class Item < ApplicationRecord
   belongs_to :user
-  has_one_attaches :image
+  has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
@@ -19,8 +19,5 @@ class Product < ApplicationRecord
     validates :shipping_day_id
     validates :price
     validates :image
-    with_options foreign_key: true do
-      validates :user
-    end
   end
 end
