@@ -24,80 +24,30 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
-      it 'category_idが空では登録できない' do
-        @item.category_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
-      end
       it 'category_idの値が1だと登録できない' do
         @item.category_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category is invalid")
-      end
-      it 'category_idの値が11を超えると登録できない' do
-        @item.category_id = '12'
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Category is invalid")
-      end
-      it 'status_idが空では登録できない' do
-        @item.status_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Status can't be blank")
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
       it 'status_idの値が1だと登録できない' do
         @item.status_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status is invalid")
-      end
-      it 'status_idの値が7を超えると登録できない' do
-        @item.status_id = '8'
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Status is invalid")
-      end
-      it 'postage_idが空では登録できない' do
-        @item.postage_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Postage can't be blank")
+        expect(@item.errors.full_messages).to include("Status must be other than 1")
       end
       it 'postage_idの値が1だと登録できない' do
         @item.postage_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Postage is invalid")
-      end
-      it 'postage_idの値が3を超えると登録できない' do
-        @item.postage_id = '4'
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Postage is invalid")
-      end
-      it 'prefecture_idが空では登録できない' do
-        @item.prefecture_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@item.errors.full_messages).to include("Postage must be other than 1")
       end
       it 'prefecture_idの値が1だと登録できない' do
         @item.prefecture_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture is invalid")
-      end
-      it 'prefecture_idの値が48を超えると登録できない' do
-        @item.prefecture_id = '49'
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture is invalid")
-      end
-      it 'shipping_day_idが空では登録できない' do
-        @item.shipping_day_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping day can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
       end
       it 'shipping_day_idの値が1だと登録できない' do
         @item.shipping_day_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping day is invalid")
-      end
-      it 'shipping_day_idの値が4を超えると登録できない' do
-        @item.shipping_day_id = '5'
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping day is invalid")
+        expect(@item.errors.full_messages).to include("Shipping day must be other than 1")
       end
       it 'priceが空では登録できない' do
         @item.price = ''
