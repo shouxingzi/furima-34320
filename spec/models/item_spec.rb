@@ -64,6 +64,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is invalid")
       end
+      it 'priceは半角英語だけでは登録できない' do
+        @item.price = 'test'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid")
+      end
       it 'priceは300未満だと登録できない' do
         @item.price = 299
         @item.valid?
