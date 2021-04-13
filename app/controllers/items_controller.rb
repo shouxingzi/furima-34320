@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :move_to_index]
   before_action :authenticate_user!, only:[:new, :edit]
   before_action :move_to_index, only: [:edit, :update]
 
@@ -40,9 +40,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    set_item
-    user = @item.user
-    if current_user != user
+    if current_user != @item.user
       redirect_to action: :index
     end
   end
