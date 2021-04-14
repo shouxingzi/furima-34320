@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :move_to_index]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :move_to_index]
   before_action :authenticate_user!, only:[:new, :edit]
   before_action :move_to_index, only: [:edit, :update]
 
@@ -32,6 +32,10 @@ class ItemsController < ApplicationController
     else
       render action: :edit
     end
+  end
+
+  def destroy
+    @item.destroy
   end
 
   private
