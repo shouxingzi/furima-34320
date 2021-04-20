@@ -1,5 +1,5 @@
 class PurchaseHistoriesController < ApplicationController
-  before_action :set_item, only: [:index, :create, :move_to_index]
+  before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!, only:[:index, :create]
   before_action :move_to_index, only: [:index, :create]
 
@@ -14,7 +14,6 @@ class PurchaseHistoriesController < ApplicationController
       @purchase_history_destination.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
@@ -34,9 +33,7 @@ class PurchaseHistoriesController < ApplicationController
   end
 
   def move_to_index
-    if @item.purchase_history != nil
-      redirect_to root_path
-    elsif current_user == @item.user
+    if @item.purchase_history != nil || current_user == @item.user
       redirect_to root_path
     end
   end

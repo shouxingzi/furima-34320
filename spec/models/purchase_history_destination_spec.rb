@@ -13,9 +13,23 @@ RSpec.describe User, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@purchase_history_destination).to be_valid
       end
+      it 'building_nameは空でも保存できる' do
+        @purchase_history_destination.building_name = ''
+        expect(@purchase_history_destination).to be_valid
+      end
     end
 
     context '内容に問題がある場合' do
+      it 'user_idが空だと保存できない' do
+        @purchase_history_destination.user_id = nil
+        @purchase_history_destination.valid?
+        expect(@purchase_history_destination.errors.full_messages).to include ("User can't be blank")
+      end
+      it 'item_idが空だと保存できない' do
+        @purchase_history_destination.item_id = nil
+        @purchase_history_destination.valid?
+        expect(@purchase_history_destination.errors.full_messages).to include ("Item can't be blank")
+      end
       it 'priceが空だと保存できない' do
         @purchase_history_destination.price = nil
         @purchase_history_destination.valid?
@@ -56,10 +70,6 @@ RSpec.describe User, type: :model do
         @purchase_history_destination.valid?
         expect(@purchase_history_destination.errors.full_messages).to include ("Address can't be blank")
       end
-      it 'building_nameは空でも保存できる' do
-        @purchase_history_destination.building_name = ''
-        expect(@purchase_history_destination).to be_valid
-      end
       it 'phone_numberが空だと保存できない' do
         @purchase_history_destination.phone_number = ''
         @purchase_history_destination.valid?
@@ -75,8 +85,11 @@ RSpec.describe User, type: :model do
         @purchase_history_destination.valid?
         expect(@purchase_history_destination.errors.full_messages).to include("Phone number is invalid")
       end
-
+      it 'phone_numberは英数混合では保存できない' do
+        @purchase_history_destination.phone_number = 'ab123456789'
+        @purchase_history_destination.valid?
+        expect(@purchase_history_destination.errors.full_messages).to include("Phone number is invalid")
+      end
     end
-
   end
 end
