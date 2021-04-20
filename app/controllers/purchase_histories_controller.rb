@@ -1,11 +1,13 @@
 class PurchaseHistoriesController < ApplicationController
+  before_action :set_item, only: [:index, :create, :move_to_index]
+  before_action :authenticate_user!, only:[:index, :create]
+  before_action :move_to_index, only: [:index, :create]
+
   def index
-    @item = Item.find(params[:item_id])
     @purchase_history_destination = PurchaseHistoryDestination.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_history_destination = PurchaseHistoryDestination.new(purchase_history_params)
     if @purchase_history_destination.valid?
       pay_item  
@@ -25,9 +27,22 @@ class PurchaseHistoriesController < ApplicationController
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: purchase_history_params[:price],  # 商品の値段
-      card: purchase_history_params[:token],    # カードトークン
-      currency: 'jpy'                 # 通貨の種類（日本円）
+      amount: purchase_history_params[:price],
+      card: purchase_history_params[:token],
+      currency: 'jpy'
     )
   end
+
+  def move_to_index
+    if @item.purchase_history != nil
+      redirect_to root_path
+    elsif current_user == @item.user
+      redirect_to root_path
+    end
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
 end
