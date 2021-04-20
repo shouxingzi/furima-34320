@@ -16,6 +16,16 @@ RSpec.describe User, type: :model do
     end
 
     context '内容に問題がある場合' do
+      it 'priceが空だと保存できない' do
+        @purchase_history_destination.price = nil
+        @purchase_history_destination.valid?
+        expect(@purchase_history_destination.errors.full_messages).to include ("Price can't be blank")
+      end
+      it 'tokenが空だと保存できない' do
+        @purchase_history_destination.token = nil
+        @purchase_history_destination.valid?
+        expect(@purchase_history_destination.errors.full_messages).to include ("Token can't be blank")
+      end
       it 'postcodeが空だと保存できない' do
         @purchase_history_destination.postcode = ''
         @purchase_history_destination.valid?
