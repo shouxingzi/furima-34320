@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :move_to_index]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only:[:new, :edit]
   before_action :move_to_index, only: [:edit, :update, :destroy]
 
@@ -45,8 +45,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    if current_user != @item.user
-      redirect_to action: :index
+    if @item.purchase_history != nil || current_user != @item.user
+      redirect_to root_path
     end
   end
 
