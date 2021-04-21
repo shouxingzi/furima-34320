@@ -81,7 +81,7 @@ RSpec.describe User, type: :model do
         expect(@purchase_history_destination.errors.full_messages).to include("Phone number is invalid")
       end
       it 'phone_numberは12桁以上の数値になると保存できない' do
-        @purchase_history_destination.phone_number = 123456789012
+        @purchase_history_destination.phone_number = '123456789012'
         @purchase_history_destination.valid?
         expect(@purchase_history_destination.errors.full_messages).to include("Phone number is invalid")
       end
