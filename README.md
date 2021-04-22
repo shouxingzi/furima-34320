@@ -70,7 +70,6 @@
 
 
 
-
 ## prefecture(ActiveHash)
 ## category(ActiveHash)
 ## status(ActiveHash)
